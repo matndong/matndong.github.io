@@ -1,334 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Matt Ndong — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --navy: #0d1b2a;
-    --navy-mid: #1a2e44;
-    --navy-light: #243b55;
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --cream: #f5f1e8;
-    --cream-dark: #ede8dc;
-    --text-dark: #1a1a2e;
-    --text-muted: #5a6478;
-    --white: #ffffff;
-    --border: rgba(201,168,76,0.25);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
-    background: var(--cream);
-    color: var(--text-dark);
-    min-height: 100vh;
-  }
-
-  /* ── HEADER ── */
-  header {
-    background: var(--navy);
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  header::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 320px; height: 320px;
-    border-radius: 50%;
-    border: 1px solid rgba(201,168,76,0.15);
-    pointer-events: none;
-  }
-
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: -40px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    border: 1px solid rgba(201,168,76,0.1);
-    pointer-events: none;
-  }
-
-  .header-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 64px 32px 56px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .header-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--border);
-    padding: 5px 14px;
-    border-radius: 2px;
-    margin-bottom: 24px;
-  }
-
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 600;
-    color: var(--white);
-    line-height: 1.15;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-  }
-
-  h1 span {
-    color: var(--gold);
-  }
-
-  .header-bio {
-    font-size: 15px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.65);
-    max-width: 520px;
-    line-height: 1.7;
-    margin-bottom: 32px;
-  }
-
-  .header-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .badge {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--cream);
-    background: var(--navy-light);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 6px 14px;
-    border-radius: 2px;
-    letter-spacing: 0.03em;
-  }
-
-  /* ── DIVIDER ── */
-  .gold-line {
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, transparent 100%);
-  }
-
-  /* ── MAIN ── */
-  main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 56px 32px 80px;
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* ── GRID ── */
-  .doc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-  }
-
-  /* ── CARD ── */
-  .doc-card {
-    background: var(--white);
-    border: 1px solid #e2ddd4;
-    border-radius: 4px;
-    padding: 28px 24px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .doc-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(13,27,42,0.1);
-    border-color: var(--gold);
-  }
-
-  .doc-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--gold);
-    border-radius: 4px 0 0 4px;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .doc-card:hover::before {
-    opacity: 1;
-  }
-
-  .card-icon {
-    width: 38px; height: 38px;
-    background: #f0ebe0;
-    border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .card-icon svg {
-    width: 20px; height: 20px;
-    fill: none;
-    stroke: var(--navy-mid);
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .card-category {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.4;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 12px;
-    border-top: 1px solid #f0ebe0;
-    margin-top: auto;
-  }
-
-  .card-type {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-  }
-
-  .card-arrow {
-    font-size: 16px;
-    color: var(--gold);
-    transition: transform 0.2s;
-  }
-
-  .doc-card:hover .card-arrow {
-    transform: translateX(4px);
-  }
-
-  /* placeholder card */
-  .doc-card.placeholder {
-    border-style: dashed;
-    border-color: #d9d3c6;
-    background: #faf8f4;
-    cursor: default;
-    pointer-events: none;
-  }
-
-  .doc-card.placeholder::before { display: none; }
-  .doc-card.placeholder .card-title { color: #b0aa9e; }
-  .doc-card.placeholder .card-desc { color: #c8c2b7; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    text-align: center;
-    padding: 28px 32px;
-  }
-
-  footer p {
-    font-size: 12px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.04em;
-  }
-
-  footer a {
-    color: var(--gold);
-    text-decoration: none;
-  }
-
-  @media (max-width: 600px) {
-    .header-inner { padding: 44px 20px 40px; }
-    main { padding: 40px 20px 60px; }
-    .doc-grid { grid-template-columns: 1fr; }
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="header-inner">
-    <span class="header-tag">Portfolio</span>
-    <h1>Matt <span>Ndong</span></h1>
-    <p class="header-bio">
-      MS in Business Analytics · BS in Physics · Bridging quantitative rigor with strategic storytelling. This portfolio showcases selected academic and professional work in operations, analytics, and business communication.
-    </p>
-    <div class="header-badges">
-      <span class="badge">MSBA</span>
-      <span class="badge">BS Physics</span>
-      <span class="badge">Data Analytics</span>
-      <span class="badge">Operations Management</span>
-      <span class="badge">Business Strategy</span>
-    </div>
-  </div>
-</header>
-
-<div class="gold-line"></div>
-
 <main>
   <p class="section-label">Selected Work</p>
 
   <div class="doc-grid">
 
-    <!-- CARD 1 — Polaris Case -->
     <a class="doc-card" href="POM-610_PolarisCaseAssignment.pdf" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -342,8 +16,7 @@
       </div>
     </a>
 
-    <!-- CARD 2 — Walmart Case -->
-    <a class="doc-card" href="Walmart_Case_Presentationpdf.pdf" target="_blank">
+    <a class="doc-card" href="Walmart_Case_Presentation.pptx" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
@@ -351,12 +24,11 @@
       <p class="card-title">Walmart Supply Chain & Financial Performance Analysis</p>
       <p class="card-desc">Deep dive into Walmart's six supply chain drivers — facilities, inventory, transportation, information, sourcing, and pricing — with financial benchmarking against Amazon and Target (2015–2019).</p>
       <div class="card-footer">
-        <span class="card-type">PDF · Presentation</span>
+        <span class="card-type">PowerPoint · Presentation</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <!-- CARD 3 — PCA & Factor Analysis -->
     <a class="doc-card" href="PS1_MathieuRedo-pdf.pdf" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -370,8 +42,7 @@
       </div>
     </a>
 
-    <!-- CARD 4 — Clustering Analysis -->
-    <a class="doc-card" href="PS2_Mathieu__1_.pdf" target="_blank">
+    <a class="doc-card" href="PS2_Mathieu%20(1).pdf" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
@@ -384,7 +55,6 @@
       </div>
     </a>
 
-    <!-- CARD 5 — Logistic Regression & Discriminant Analysis -->
     <a class="doc-card" href="PS3_Mathieu-pdf.pdf" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -398,8 +68,7 @@
       </div>
     </a>
 
-    <!-- CARD 6 — Google Tech Strategy Essay -->
-    <a class="doc-card" href="Google_Ndong.pdf" target="_blank">
+    <a class="doc-card" href="Google.NdongReviewed.docx" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
@@ -407,13 +76,12 @@
       <p class="card-title">Google Inc. in 2014 — Managing Technological Innovation</p>
       <p class="card-desc">Strategic analysis of Google's growth from search engine to global tech leader. Examines the 70/20/10 innovation model, the TSP framework, key acquisitions (YouTube, Android), and a BCG matrix mapping Google's portfolio across market growth and share.</p>
       <div class="card-footer">
-        <span class="card-type">PDF · Essay</span>
+        <span class="card-type">Word Doc · Essay</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <!-- CARD 7 — Time Series & ARIMA -->
-    <a class="doc-card" href="The_Value_of_Strategic_Insights_in_Business_Analytics.docx" target="_blank">
+    <a class="doc-card" href="The Value of Strategic Insights in Business Analytics...." target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
@@ -426,8 +94,7 @@
       </div>
     </a>
 
-    <!-- CARD 8 — Wright Brothers Tech Strategy -->
-    <a class="doc-card" href="TheWrightBrothers_Ndong.pdf" target="_blank">
+    <a class="doc-card" href="TheWrightBrothersReviewed.Ndong.docx" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
@@ -435,13 +102,12 @@
       <p class="card-title">The Wright Brothers — Setting the Industry Standard</p>
       <p class="card-desc">Strategic analysis of how the Wright Brothers made their aircraft the industry standard through innovation, patent protection, and market positioning. Draws parallels to modern tech companies and examines the tradeoffs between IP protection and collaborative growth.</p>
       <div class="card-footer">
-        <span class="card-type">PDF · Essay</span>
+        <span class="card-type">Word Doc · Essay</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <!-- CARD 9 — EMI CT Scanner -->
-    <a class="doc-card" href="EMI_Ndong.pdf" target="_blank">
+    <a class="doc-card" href="EMI.NdongReviewed.docx" target="_blank">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
@@ -449,17 +115,10 @@
       <p class="card-title">EMI & the CT Scanner — Market Entry Decision</p>
       <p class="card-desc">Strategic recommendation on whether EMI should enter the diagnostic imaging market with its CT scanner invention. Analyzes competitive gaps, IP protection, manufacturing strategy, and partnership opportunities with GE and Siemens for long-term viability.</p>
       <div class="card-footer">
-        <span class="card-type">PDF · Essay</span>
+        <span class="card-type">Word Doc · Essay</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
   </div>
 </main>
-
-<footer>
-  <p>Matt Ndong &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/mathieu-a-ndong-452167362/" target="_blank">LinkedIn</a> &nbsp;·&nbsp; matndong@gmail.com</p>
-</footer>
-
-</body>
-</html>
